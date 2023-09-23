@@ -1,7 +1,7 @@
 // Presentational component
 import React from "react";
 
-const CardCreator = props = (
+const CardCreator = props => (
     <div>
         <label htmlFor="createNewCard"> Create a New Card! </label>
         <form onSubmit={props.handleSubmit}>

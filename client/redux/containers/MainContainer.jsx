@@ -51,7 +51,6 @@ const MainContainer = () => {
                 editCardHandleSubmit = {editCardHandleSubmit}
                 deleteCardHandleSubmit = {deleteCardHandleSubmit}
             ></CardDisplay>
-\
         </div>
 
 
@@ -66,3 +65,4 @@ const MainContainer = () => {
 
 // IT WILL PASS DOWN THE CARD ID, WORD, AND DEFINITION AS PROPS
 
+export default MainContainer;
