@@ -27,6 +27,8 @@ cardController.createCard = (req, res, next) => {
     const query = 'INSERT INTO cards (word, definition) VALUES ($1, $2)'
     const values = ['james', 'cristina'];
 
+    console.log('LOOK HERE', req.body);
+
     // execute query
     db.query(query, values)
         .then((result) => {
