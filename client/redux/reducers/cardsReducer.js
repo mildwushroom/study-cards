@@ -7,13 +7,13 @@ const cardSlice = createSlice({
         createCard(state, action) {
             state[id] = payload.id,
             state[word] = payload.word,
-            state[definition] = payload.definition
+            state[definition] = payload.definition,
             state[user_id] = payload.user_id
         },
         editCard(state, action) {
             state[id] = payload.id,
             state[word] = payload.word,
-            state[definition] = payload.definition
+            state[definition] = payload.definition,
             state[user_id] = payload.user_id
         },
         deleteCard(state, action) {
@@ -27,4 +27,4 @@ console.log(cardSlice)
 const { actions, reducer } = cardSlice;
 const { createCard, editCard, deleteCard} = actions
 
-export default reducer;
+export default cardSlice;
