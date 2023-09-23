@@ -30,6 +30,7 @@ app.use((err, req, res, next) => {
         message: { error: 'You hit the global error. Unknown middleware error.'} 
     };
     const modifiedErrorObj = Object.assign(defaultError, err);
+    console.log(modifiedErrorObj.log);
     return res.status(modifiedErrorObj.status).json(modifiedErrorObj.message);
 })
 
