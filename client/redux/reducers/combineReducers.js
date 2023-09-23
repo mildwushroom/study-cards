@@ -1,9 +1,9 @@
 // THIS COMBINES ALL REDUCERS (CURRENTLY ONLY 1 REDUCER)
 import { combineReducers } from 'redux';
-import cardsReducer from './cardsReducer';
+import reducer from './cardsReducer';
 
 const reducers = combineReducers({
-    cards: cardsReducer,
-})
+    cardsReducer: reducer,
+});
 
-export default reducers
+export default reducers;
