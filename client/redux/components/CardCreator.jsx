@@ -5,9 +5,11 @@ const CardCreator = props = (
     <div>
         <label htmlFor="createNewCard"> Create a New Card! </label>
         <form onSubmit={props.handleSubmit}>
-            <label></label>
-            <input></input>
-            <button></button>
+            <label> New Card Word: </label>
+            <input type="text"></input>
+            <label> New Card Definition </label>
+            <input type="text"></input>
+            <button type="submit"> Add Card! </button>
         </form>
     </div>
 
