@@ -4,7 +4,7 @@ import React from "react";
 const CardCreator = props => (
     <div>
         <label htmlFor="createNewCard"> Create a New Card! </label>
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.addCardHandleSubmit}>
             <label> New Card Word: </label>
             <input type="text"></input>
             <label> New Card Definition </label>

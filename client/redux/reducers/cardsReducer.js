@@ -6,37 +6,29 @@ const cardSlice = createSlice({
     reducers: {
         createCard(state, action) {
             const { payload } = action;
+            console.log('ACTION', action)
+            // const { id, word, definition, user_id } = payload;
 
-            fetch('/api/cards', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-                })
-                .then((response) => response.json())
-                .then((response) => {
-                    const { id, word, definition, user_id } = response;
+            // state.id = payload.id,
+            // state.word = payload.word,
+            // state.definition = payload.definition,
+            // state.user_id = payload.user_id
 
-                    state[id] = id;
-                    state[word] = word;
-                    state[definition] = definition;
-                    state[user_id] = user_id;
-                });
+            console.log('STATE FROM REDUCER', state)
         },
-        editCard(state, action) {
-            const { payload } = action;
+        // editCard(state, action) {
+        //     const { payload } = action;
 
-            state[id] = payload.id,
-            state[word] = payload.word,
-            state[definition] = payload.definition,
-            state[user_id] = payload.user_id
-        },
-        deleteCard(state, action) {
-            const { payload } = action;
+        //     state[id] = payload.id,
+        //     state[word] = payload.word,
+        //     state[definition] = payload.definition,
+        //     state[user_id] = payload.user_id
+        // },
+        // deleteCard(state, action) {
+        //     const { payload } = action;
 
-            state[id] = payload.id
-        },
+        //     state[id] = payload.id
+        // },
     },
 })
 
