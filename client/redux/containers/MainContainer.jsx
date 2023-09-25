@@ -3,46 +3,49 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardDisplay from "../components/Card";
 import CardCreator from "../components/CardCreator";
-import cardSlice from "../reducers/cardsReducer";
+import { cardSlice, postCardThunk } from "../reducers/cardsReducer";
+import { useEffect } from "react";
+
+// console.log('POST CARD THINK FROM MAIN CONTAINER', postCardThunk())
 
 const { createCard, editCard, deleteCard} = cardSlice.actions
 
-const fetchRequest = (card, method) => {
-    // If no "method" is passed, it uses this default header
-    let defaultHeader = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(card)
-        }
+// console.log('CREATE CARD', createCard)
 
-        // if a method is is passed, it updates the default header
-    let header = Object.assign({}, defaultHeader, method)
+// const fetchRequest = async (card, method) => {
+//     // If no "method" is passed, it uses this default header
+//     let defaultHeader = {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json"
+//         },
+//         body: JSON.stringify(card)
+//         }
 
-    console.log('YOU HAVE HIT THE FETCH REQUEST', header)
+//         // if a method is is passed, it updates the default header
+//     let header = Object.assign({}, defaultHeader, method)
 
-    let parsedData;
+//     console.log('YOU HAVE HIT THE FETCH REQUEST', header)
 
-    fetch('/api/cards', header)
-        .then((data) => {
-            parsedData = data.json();
-        })
-        .then(() => {
-            return parsedData;
-        })
-        // .then((data) => console.log('DATA', data))
-        .catch((err) => {console.error(err)})
+//     const result = await fetch('/api/cards', header)
+//         .then((data) => data.json())
+//         .then((data) => console.log('DATA', data))
+//         .catch((err) => console.error(err))
         
-}
+//     return result;
+// }
 
 const MainContainer = () => {
 
     // THE STATES
-    const idSelector = useSelector(state => state.id);
-    const wordSelector = useSelector(state => state.word);
-    const definitionSelector = useSelector(state => state.definition);
-    const user_idSelector = useSelector(state => state.user_id);
+    // const idSelector = useSelector(state => state.id);
+    // const wordSelector = useSelector(state => state.word);
+    // const definitionSelector = useSelector(state => state.definition);
+    // const user_idSelector = useSelector(state => state.user_id);
+    const entities = useSelector(state => state.entities);
+    const loading = useSelector(state => state.loading);
+
+    // const { entities, loading } = useSelector((state) => state.cards);
 
     const dispatch = useDispatch();
 
@@ -56,13 +59,15 @@ const MainContainer = () => {
         const newCard = {word: word, definition: def}
 
         // passes the value object into the fetch request
-        const fetchedNewCard = fetchRequest(newCard)
-        console.log('FETCHED NEW CARD', fetchedNewCard)
-
+        const fetchedNewCard = postCardThunk(newCard)
+        // console.log('FETCHED NEW CARD', fetchedNewCard)
+    
         // dispatches what gets returned from the server
-        dispatch(createCard(fetchedNewCard))
+        dispatch(fetchedNewCard)
     }
+    console.log('ENTITIES', entities)
 
+    
     const editCardHandleSubmit = event => {
         event.preventDefault();
         const editedCard = event.target[0].value
