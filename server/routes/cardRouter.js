@@ -3,12 +3,12 @@ const cardController = require('../controllers/cardController.js');
 const cardRouter = express.Router();
 
 cardRouter.get('/', cardController.getAllCards, (req, res) => {
-    // console.log('NEW CARD IS HERE', res.locals.newCard);
-    // res.status(200).json(res.locals.newCard);
+    // console.log('RESULT ROWS', res.locals.allCards);
+    res.status(200).json(res.locals.allCards);
 });
 
 cardRouter.post('/', cardController.createCard, (req, res) => {
-    console.log('NEW CARD IS HERE', res.locals.newCard);
+    // console.log('NEW CARD IS HERE', res.locals.newCard);
     res.status(200).json(res.locals.newCard);
 });
 

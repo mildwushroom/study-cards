@@ -1,9 +1,9 @@
 //stateful containers that will update presentational componenets
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import CardDisplay from "../components/Card";
+import CardDisplay from "../components/CardDisplay";
 import CardCreator from "../components/CardCreator";
-import { cardSlice, postCardThunk } from "../reducers/cardsReducer";
+import { cardSlice, postCardThunk, getCardThunk } from "../reducers/cardsReducer";
 import { useEffect } from "react";
 
 // console.log('POST CARD THINK FROM MAIN CONTAINER', postCardThunk())
@@ -12,28 +12,28 @@ const { createCard, editCard, deleteCard} = cardSlice.actions
 
 // console.log('CREATE CARD', createCard)
 
-// const fetchRequest = async (card, method) => {
-//     // If no "method" is passed, it uses this default header
-//     let defaultHeader = {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json"
-//         },
-//         body: JSON.stringify(card)
-//         }
+const fetchRequest = async (card, method) => {
+    // If no "method" is passed, it uses this default header
+    let defaultHeader = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(card)
+        }
 
-//         // if a method is is passed, it updates the default header
-//     let header = Object.assign({}, defaultHeader, method)
+        // if a method is is passed, it updates the default header
+    let header = Object.assign({}, defaultHeader, method)
 
-//     console.log('YOU HAVE HIT THE FETCH REQUEST', header)
+    // console.log('YOU HAVE HIT THE FETCH REQUEST', header)
 
-//     const result = await fetch('/api/cards', header)
-//         .then((data) => data.json())
-//         .then((data) => console.log('DATA', data))
-//         .catch((err) => console.error(err))
+    const result = await fetch('/api/cards', header)
+        .then((data) => data.json())
+        // .then((data) => console.log('DATA', data))
+        .catch((err) => console.error(err))
         
-//     return result;
-// }
+    return result;
+}
 
 const MainContainer = () => {
 
@@ -46,8 +46,14 @@ const MainContainer = () => {
     const loading = useSelector(state => state.loading);
 
     // const { entities, loading } = useSelector((state) => state.cards);
-
+    
     const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(getCardThunk());
+    }, []);
+
+    // console.log('ENTITIEISIESIS', entities);
 
     const addCardHandleSubmit = (event) => {
         // Stops the page from refreshing on form submit
@@ -65,9 +71,8 @@ const MainContainer = () => {
         // dispatches what gets returned from the server
         dispatch(fetchedNewCard)
     }
-    console.log('ENTITIES', entities)
+    // console.log('ENTITIES', entities)
 
-    
     const editCardHandleSubmit = event => {
         event.preventDefault();
         const editedCard = event.target[0].value
@@ -82,18 +87,13 @@ const MainContainer = () => {
 
     return (
         <div>
-            <CardCreator
-            addCardHandleSubmit = {addCardHandleSubmit}
-             ></CardCreator>
-            {/* <CardDisplay
-                idSelector = {idSelector}
-                wordSelector = {wordSelector}
-                definitionSelector = {definitionSelector}
-                user_idSelector = {user_idSelector}
-                addCardHandleSubmit = {addCardHandleSubmit}
+            <CardCreator addCardHandleSubmit = {addCardHandleSubmit}/>
+            <CardDisplay 
+                entities = {entities}
                 editCardHandleSubmit = {editCardHandleSubmit}
                 deleteCardHandleSubmit = {deleteCardHandleSubmit}
-            ></CardDisplay> */}
+            />
+            
         </div>
 
 
