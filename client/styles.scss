@@ -1,1 +1,73 @@
 //styles for css
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+// body
+body {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #e6edf7;
+    color: #22232e;
+    font-family: 'Montserrat';
+}
+
+// card
+.cardBox {
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+#card-creator-box {
+    display: flex;
+    flex-direction: column;
+    grid-template-areas: "header" "input button";
+    border-color: #22232e;
+    border: solid 1px;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+
+#card-creator-header{
+    font-weight: 700;
+    text-align: center;
+}
+
+
+// add card button
+#add-card-button {
+    background-color: #e6edf7;
+    border: 2px solid #22232e;
+    border-radius: 30px;
+    box-shadow: #22232e 4px 4px 0 0;
+    color: #22232e;
+    cursor: pointer;
+    // display: inline-block;
+    position: relative;
+    font-weight: 600;
+    font-size: 18px;
+    padding: 0 18px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    // -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+#add-card-button:hover {
+    background-color: #fff;
+  }
+  
+#add-card-button:active {
+    box-shadow: #22232e 2px 2px 0 0;
+    transform: translate(2px, 2px);
+  }
+  
+  @media (min-width: 768px) {
+    #add-card-button {
+      min-width: 120px;
+      padding: 0 25px;
+    }
+  }
