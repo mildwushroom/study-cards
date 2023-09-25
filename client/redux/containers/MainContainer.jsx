@@ -10,9 +10,9 @@ const { createCard, editCard, deleteCard} = cardSlice.actions
 const fetchRequest = (card, method) => {
     // If no "method" is passed, it uses this default header
     let defaultHeader = {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(card)
         }
@@ -22,10 +22,17 @@ const fetchRequest = (card, method) => {
 
     console.log('YOU HAVE HIT THE FETCH REQUEST', header)
 
+    let parsedData;
+
     fetch('/api/cards', header)
-        .then((data) => data.json())
-        .then((data) => console.log('DATA', data))
-        .catch((err) => console.error(err))
+        .then((data) => {
+            parsedData = data.json();
+        })
+        .then(() => {
+            return parsedData;
+        })
+        // .then((data) => console.log('DATA', data))
+        .catch((err) => {console.error(err)})
         
 }
 

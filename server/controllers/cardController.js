@@ -24,15 +24,25 @@ cardController.getAllCards = (req, res, next) => {
 
 cardController.createCard = (req, res, next) => {
     // define query that adds one card based on the id passed from front end
-    const query = 'INSERT INTO cards (word, definition) VALUES ($1, $2)'
+    const query = 'INSERT INTO cards (word, definition) VALUES ($1, $2) RETURNING *'
     // const values = ['james', 'cristina'];
-    const values = req.body;
+    const { word, definition } = req.body;
+    console.log('LOOK HERE FOR REQ BODY', req.body);
 
-    console.log('LOOK HERE', values);
+    const values = [word, definition];
 
     // execute query
     db.query(query, values)
         .then((result) => {
+            console.log('RESULT ROWS', result.rows);
+            const { id, word, definition, user_id } = result.rows[0];
+            res.locals.newCard = {
+                id: id,
+                word: word,
+                definition: definition,
+                user_id: user_id
+            };
+            console.log('LOOK HERE FOR NEW CARD', res.locals.newCard);
             return next();
         })
         .catch((err) => {
