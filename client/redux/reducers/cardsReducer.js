@@ -8,12 +8,11 @@ const cardSlice = createSlice({
             const { payload } = action;
             console.log('ACTION', action)
             // const { id, word, definition, user_id } = payload;
-            console.log('PAYLOAD', payload);
 
-            // state.id = id;
-            // state.word = word;
-            // state.definition = definition;
-            // state.user_id = user_id;
+            // state.id = payload.id,
+            // state.word = payload.word,
+            // state.definition = payload.definition,
+            // state.user_id = payload.user_id
 
             console.log('STATE FROM REDUCER', state)
         },
@@ -39,3 +38,12 @@ const { actions, reducer } = cardSlice;
 const { createCard, editCard, deleteCard} = actions
 
 export default cardSlice;
+
+
+
+
+
+
+
+
+

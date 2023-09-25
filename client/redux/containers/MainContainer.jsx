@@ -7,7 +7,7 @@ import cardSlice from "../reducers/cardsReducer";
 
 const { createCard, editCard, deleteCard} = cardSlice.actions
 
-const fetchRequest = (card, method) => {
+const fetchRequest = async (card, method) => {
     // If no "method" is passed, it uses this default header
     let defaultHeader = {
         method: "POST",
@@ -22,18 +22,16 @@ const fetchRequest = (card, method) => {
 
     console.log('YOU HAVE HIT THE FETCH REQUEST', header)
 
-    let parsedData;
-
-    fetch('/api/cards', header)
-        .then((data) => {
-            parsedData = data.json();
-        })
-        .then(() => {
-            return parsedData;
-        })
-        // .then((data) => console.log('DATA', data))
-        .catch((err) => {console.error(err)})
+    const result = await fetch('/api/cards', header)
+        .then((data) => data.json())
+        .then((data) => console.log('DATA', data))
+        .catch((err) => console.error(err))
         
+    return result;
+
+
+
+    
 }
 
 const MainContainer = () => {
