@@ -7,7 +7,27 @@ import cardSlice from "../reducers/cardsReducer";
 
 const { createCard, editCard, deleteCard} = cardSlice.actions
 
+const fetchRequest = (card, method) => {
+    // If no "method" is passed, it uses this default header
+    let defaultHeader = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(card)
+        }
 
+        // if a method is is passed, it updates the default header
+    let header = Object.assign({}, defaultHeader, method)
+
+    console.log('YOU HAVE HIT THE FETCH REQUEST', header)
+
+    fetch('/api/cards', header)
+        .then((data) => data.json())
+        .then((data) => console.log('DATA', data))
+        .catch((err) => console.error(err))
+        
+}
 
 const MainContainer = () => {
 
@@ -19,10 +39,21 @@ const MainContainer = () => {
 
     const dispatch = useDispatch();
 
-    const addCardHandleSubmit = event => {
-        event.preventDefault();        
-        const newCard = event.target[0].value
-        dispatch(createCard(newCard))
+    const addCardHandleSubmit = (event) => {
+        // Stops the page from refreshing on form submit
+        event.preventDefault();   
+        
+        // grabs the values from the frontend and saves it into an object
+        const word = event.target[0].value
+        const def = event.target[1].value
+        const newCard = {word: word, definition: def}
+
+        // passes the value object into the fetch request
+        const fetchedNewCard = fetchRequest(newCard)
+        console.log('FETCHED NEW CARD', fetchedNewCard)
+
+        // dispatches what gets returned from the server
+        dispatch(createCard(fetchedNewCard))
     }
 
     const editCardHandleSubmit = event => {
@@ -42,7 +73,7 @@ const MainContainer = () => {
             <CardCreator
             addCardHandleSubmit = {addCardHandleSubmit}
              ></CardCreator>
-            <CardDisplay
+            {/* <CardDisplay
                 idSelector = {idSelector}
                 wordSelector = {wordSelector}
                 definitionSelector = {definitionSelector}
@@ -50,7 +81,7 @@ const MainContainer = () => {
                 addCardHandleSubmit = {addCardHandleSubmit}
                 editCardHandleSubmit = {editCardHandleSubmit}
                 deleteCardHandleSubmit = {deleteCardHandleSubmit}
-            ></CardDisplay>
+            ></CardDisplay> */}
         </div>
 
 
