@@ -31,6 +31,18 @@ export const postCardThunk = createAsyncThunk('cards/createCard', async (card, t
     return parsedData;
 });
 
+export const getCardThunk = createAsyncThunk('cards/createCard', async (thunkAPI) =>{
+  let defaultHeader = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }
+  const parsedData = await fetch('/api/cards', defaultHeader).then((data) => data.json())
+//   console.log('PARSED DATA', parsedData)
+  return parsedData;
+});
+
 export const cardSlice = createSlice({
     name: 'cards',
     initialState,
@@ -68,10 +80,22 @@ export const cardSlice = createSlice({
         [postCardThunk.fulfilled]: (state, { payload }) => {
             state.loading = false
             state.entities = payload;
-            console.log('PROMISE WAS FULFILLED')
-            console.log('STATE', state.entities)
+            // console.log('PROMISE WAS FULFILLED')
+            // console.log('STATE', state.entities)
         },
         [postCardThunk.rejected]: (state) => {
+          state.loading = false
+        },
+        [getCardThunk.pending]: (state) => {
+          state.loading = true
+        },
+        [getCardThunk.fulfilled]: (state, { payload }) => {
+            state.loading = false
+            state.entities = payload;
+            console.log('GET PROMISE WAS FULFILLED')
+            // console.log('GET STATE', state.entities)
+        },
+        [getCardThunk.rejected]: (state) => {
           state.loading = false
         },
       },

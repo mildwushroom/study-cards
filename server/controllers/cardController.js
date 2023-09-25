@@ -11,7 +11,8 @@ cardController.getAllCards = (req, res, next) => {
     db.query(query)
         .then(console.log('query started'))
         .then((result) => {
-            console.log('result here: ', result.rows);
+            // console.log('result here: ', result.rows);
+            res.locals.allCards = result.rows
             return next();
         })
         .catch((err) => {
