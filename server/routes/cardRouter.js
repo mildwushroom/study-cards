@@ -3,11 +3,13 @@ const cardController = require('../controllers/cardController.js');
 const cardRouter = express.Router();
 
 cardRouter.get('/', cardController.getAllCards, (req, res) => {
-    res.status(200).send('GET request to cards made successfully!');
+    console.log('NEW CARD IS HERE', res.locals.newCard);
+    res.status(200).json(res.locals.newCard);
 });
 
 cardRouter.post('/', cardController.createCard, (req, res) => {
-    res.status(200).send('POST request to cards made successfully!');
+    console.log('NEW CARD IS HERE', res.locals.newCard);
+    res.status(200).json(res.locals.newCard);
 });
 
 cardRouter.patch('/', cardController.editCard, (req, res) => {
