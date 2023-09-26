@@ -2,7 +2,16 @@ const express = require('express');
 const path = require('path');
 const app = express();
 const PORT = 3000;
-const cardRouter = require('./routes/cardRouter.js')
+const cardRouter = require('./routes/cardRouter.js');
+const mongoose = require("mongoose");
+
+mongoose.connect(
+    "mongodb+srv://pkarwe62:JFZBtUu007N2kkwN@cluster0.ru954su.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp",
+    { useNewUrlParser: true, useUnifiedTopology: true }
+  );
+  mongoose.connection.once("open", () => {
+    console.log("Connected to Database");
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
