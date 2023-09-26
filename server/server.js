@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 const cardRouter = require('./routes/cardRouter.js');
@@ -27,16 +28,20 @@ app.use('/api/cards', cardRouter);
 /* ERROR HANDLERS */
 
 // 404 eror handler
-app.use('*', (req,res) => {
+app.use('*', (req, res) => {
     res.status(404).send('Page not found.');
-})
+});
+
+mongoose.connect("mongodb+srv://pkarwe62:JFZBtUu007N2kkwN@cluster0.ru954su.mongodb.net/?retryWrites=true&w=majority&appName=AtlasApp", { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log("Successfully connected to MongoDB!");
+});
 
 // Global error handler
 app.use((err, req, res, next) => {
     const defaultError = {
         log: 'Global error handler caught an error somewhere.',
         status: 500,
-        message: { error: 'You hit the global error. Unknown middleware error.'} 
+        message: { error: 'You hit the global error. Unknown middleware error.' }
     };
     const modifiedErrorObj = Object.assign({}, defaultError, err);
     console.log(modifiedErrorObj.log);
