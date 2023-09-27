@@ -11,7 +11,7 @@ const DisplayFolder = (props) => {
             </CardContent>
             <CardActions>
                 <Button variant="soft" color="success">
-                    <Link to={`http://localhost:8080/quiz/${props.category}`}>
+                    <Link to={`/quiz/${props.category}`}>
                         Go To Quiz
                     </Link>
                 </Button>

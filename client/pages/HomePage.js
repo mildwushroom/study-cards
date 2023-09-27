@@ -33,7 +33,7 @@ const HomePage = () => {
         <div>
             <h1 style={{ textAlign: "center" }}></h1>
             <Button variant="soft" color="success">
-                <Link to='http://localhost:8080/editor'>
+                <Link to='/editor'>
                     Go To Editor
                 </Link>
             </Button>
