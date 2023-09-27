@@ -30,12 +30,12 @@ export const getCategories = createAsyncThunk('/api/categories', async () => {
 });
 
 // getCategoryCards
-export const getCategoryCards = createAsyncThunk('/api/cards', async (category) => {
+export const getCategoryCards = createAsyncThunk('/api/categoryCards', async (category) => {
     try {
         const response = await fetch(`/api/cards/${category}`)
-            .then((data) => data.json());
-
-        console.log('response is', response)
+            .then((response) => response.json())
+        
+        console.log('Thunk response to getCategoryCards: ', response);
         return response;
     }
     catch (error) {
@@ -111,7 +111,7 @@ export const cardSlice = createSlice({
     name: 'cards',
     initialState: initialState,
     reducers: {},
-    //Below reducers not necessary given our utilization of extra reducers!
+    // Below reducers not necessary given our utilization of extra reducers!
 
     // addCard: (state, action) => {
 
@@ -163,10 +163,10 @@ export const cardSlice = createSlice({
     //     //action.payload = array of card objects
     //     state.cards = action.payload;
     //     state.card_total = state.cards.length;
-    // }
+    // },
 
     extraReducers: {
-        //--------------------- InitialState: isCatergoriesFetched --------------------------------------------------------------
+//--------------------- InitialState: isCatergoriesFetched --------------------------------------------------------------
         [getCategories.fulfilled]: (state, action) => {
             state.isCategoriesFetched = true;
             state.categories = action.payload;
@@ -179,8 +179,10 @@ export const cardSlice = createSlice({
         },
         //---------------------- InitialState: areCardsFetched -----------------------------------------------------------
         [getCategoryCards.fulfilled]: (state, action) => {
+            console.log('getCategoryCards reducer invoked');
             state.areCardsFetched = true;
             state.cards = action.payload;
+            state.card_total = state.cards.length;
         },
 
         [getCategoryCards.pending]: (state, action) => {
@@ -228,6 +230,7 @@ export const cardSlice = createSlice({
         },
         //------------------- deleteCard reducer -----------------------------------------------------------------------
         [deleteCard.fulfilled]: (state, action) => {
+            console.log('deleteCard reducer invoked')
             const index = findIndex(action.payload._id, state.cards);
             state.cards = state.cards.slice(0, index).concat(state.cards.slice(index + 1));
             state.card_total--;
