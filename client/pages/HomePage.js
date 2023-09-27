@@ -31,7 +31,9 @@ const HomePage = () => {
     return (
         <div>
             <p className="title"> Study Cards </p>
-            <Button> </Button>
+            <Button className='headerButton' size='medium' as={Link} to='/editor'> 
+                Create cards in editor
+            </Button>
             <h2 style={{ textAlign: "center" }}>Categories</h2>
             {
                 !isCategoriesFetched ? <p>Loading!</p> :
