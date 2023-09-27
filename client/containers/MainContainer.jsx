@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 // console.log('POST CARD THINK FROM MAIN CONTAINER', postCardThunk())
 
-const { createCard, editCard, deleteCard} = cardSlice.actions
+const { createCard, editCard, deleteCard } = cardSlice.actions
 
 // console.log('CREATE CARD', createCard)
 
@@ -20,9 +20,9 @@ const fetchRequest = async (card, method) => {
             "Content-Type": "application/json"
         },
         body: JSON.stringify(card)
-        }
+    }
 
-        // if a method is is passed, it updates the default header
+    // if a method is is passed, it updates the default header
     let header = Object.assign({}, defaultHeader, method)
 
     // console.log('YOU HAVE HIT THE FETCH REQUEST', header)
@@ -31,7 +31,7 @@ const fetchRequest = async (card, method) => {
         .then((data) => data.json())
         // .then((data) => console.log('DATA', data))
         .catch((err) => console.error(err))
-        
+
     return result;
 }
 
@@ -46,7 +46,7 @@ const MainContainer = () => {
     const loading = useSelector(state => state.loading);
 
     // const { entities, loading } = useSelector((state) => state.cards);
-    
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -57,17 +57,17 @@ const MainContainer = () => {
 
     const addCardHandleSubmit = (event) => {
         // Stops the page from refreshing on form submit
-        event.preventDefault();   
-        
+        event.preventDefault();
+
         // grabs the values from the frontend and saves it into an object
         const word = event.target[0].value
         const def = event.target[1].value
-        const newCard = {word: word, definition: def}
+        const newCard = { word: word, definition: def }
 
         // passes the value object into the fetch request
         const fetchedNewCard = postCardThunk(newCard)
         // console.log('FETCHED NEW CARD', fetchedNewCard)
-    
+
         // dispatches what gets returned from the server
         dispatch(fetchedNewCard)
     }
@@ -87,13 +87,13 @@ const MainContainer = () => {
 
     return (
         <div>
-            <CardCreator addCardHandleSubmit = {addCardHandleSubmit}/>
-            <CardDisplay 
-                entities = {entities}
-                editCardHandleSubmit = {editCardHandleSubmit}
-                deleteCardHandleSubmit = {deleteCardHandleSubmit}
+            <CardCreator addCardHandleSubmit={addCardHandleSubmit} />
+            <CardDisplay
+                entities={entities}
+                editCardHandleSubmit={editCardHandleSubmit}
+                deleteCardHandleSubmit={deleteCardHandleSubmit}
             />
-            
+
         </div>
 
 

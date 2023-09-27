@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
+<<<<<<< HEAD
 const cardRouter = require('./routes/cardRouter.js');
 const mongoose = require("mongoose");
 
@@ -13,6 +14,10 @@ mongoose.connect(
   mongoose.connection.once("open", () => {
     console.log("Connected to Database");
   });
+=======
+const cardRouter = require('./routes/cardRouter.js')
+const categoriesRouter = require('./routes/categoriesRouter')
+>>>>>>> 632f9399bfbc22fe7b65663b3c35ac7ab4031dba
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -23,6 +28,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 /* ROUTERS */
 // router for any requests made for cards
 app.use('/api/cards', cardRouter);
+app.use('/api/categories', categoriesRouter);
 
 
 /* ERROR HANDLERS */
