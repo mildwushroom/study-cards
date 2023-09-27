@@ -211,6 +211,7 @@ export const cardSlice = createSlice({
         },
         //------------------- editCard Reducer -----------------------------------------------------------------------
         [editCard.fulfilled]: (state, action) => {
+            console.log('action payload is', action.payload);
             const index = findIndex(action.payload._id, state.cards);
             const updatedCard = {
 
