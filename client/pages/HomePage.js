@@ -39,12 +39,6 @@ const HomePage = (props) => {
 
     return (
         <div>
-            <h1 style={{ textAlign: "center" }}></h1>
-            <Button variant="soft" color="success">
-                <Link to='/editor'>
-                    Go To Editor
-                </Link>
-            </Button>
             {
                 !isCategoriesFetched ? <p>Loading!</p> :
                     categoriesArray

@@ -14,7 +14,8 @@ const MainContainer = (props) => {
         dispatch(getCategoryCards(props.category))
     }, []);
 
-    const cards = useSelector(state => console.log(state));
+    const cards = useSelector(state => state.store.cards);
+    console.log('cards is', cards);
 
     return (
         <div>Hello from MainContainer
