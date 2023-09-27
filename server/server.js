@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3000;
 const cardRouter = require('./routes/cardRouter.js')
+const categoriesRouter = require('./routes/categoriesRouter')
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -14,6 +15,7 @@ app.use('/', express.static(path.resolve(__dirname, '../dist')));
 /* ROUTERS */
 // router for any requests made for cards
 app.use('/api/cards', cardRouter);
+app.use('/api/categories', categoriesRouter);
 
 
 /* ERROR HANDLERS */
