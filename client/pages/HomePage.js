@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategories } from '../components/cardSlice';
-import DisplayFolder from '../components/displayFolder.jsx'
-import { Button } from "@mui/material"
+import DisplayFolder from '../components/displayFolder';
+import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+
 
 
 const HomePage = () => {
@@ -21,20 +23,20 @@ const HomePage = () => {
     const categoriesArray = categories.map((category, index) => {
         return (
             <div key={index}>
-                <DisplayFolder category={category}/>
+                <DisplayFolder category={category} />
+                <br />
             </div>
         )
     });
 
-    console.log(categoriesArray);
-
     return (
         <div>
-            <p className="title"> Study Cards </p>
-            <Button className='headerButton' size='medium' as={Link} to='/editor'> 
-                Create cards in editor
+            <h1 style={{ textAlign: "center" }}></h1>
+            <Button variant="soft" color="success">
+                <Link to='http://localhost:8080/editor'>
+                    Go To Editor
+                </Link>
             </Button>
-            <h2 style={{ textAlign: "center" }}>Categories</h2>
             {
                 !isCategoriesFetched ? <p>Loading!</p> :
                     categoriesArray

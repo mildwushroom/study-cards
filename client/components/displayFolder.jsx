@@ -1,4 +1,5 @@
-import { Card, CardActions, CardContent, CardMedia, Button, Typography, Link } from '@mui/material';
+import { Card, CardActions, CardContent, CardMedia, Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import React from 'react';
 
 const DisplayFolder = (props) => {
@@ -9,8 +10,10 @@ const DisplayFolder = (props) => {
                 <Typography>{props.category}</Typography>
             </CardContent>
             <CardActions>
-                <Button className='button' size='small' as={Link} to={`/quiz/${props.category}`}>
-                    Take the Quiz   
+                <Button variant="soft" color="success">
+                    <Link to={`http://localhost:8080/quiz/${props.category}`}>
+                        Go To Quiz
+                    </Link>
                 </Button>
             </CardActions>
         </Card>
