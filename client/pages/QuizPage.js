@@ -1,11 +1,11 @@
-import { useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom';
 import React from "react";
 
 const QuizPage = (props) => {
-    const category = useParams();
+    const { category } = useParams();
 
-    return(
-        <p> Quiz page: {category} </p>
+    return (
+        <p> Quiz page: Works! Heres the category: {category} </p>
     )
 
 }
