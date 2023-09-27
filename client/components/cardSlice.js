@@ -33,7 +33,10 @@ export const getCategories = createAsyncThunk('/api/categories', async () => {
 export const getCategoryCards = createAsyncThunk('/api/cards', async (category) => {
     try {
         const response = await fetch(`/api/cards/${category}`)
-            .then((response) => response.json())
+            .then((data) => data.json());
+
+        console.log('response is', response)
+        return response;
     }
     catch (error) {
         console.log(error);
@@ -206,6 +209,7 @@ export const cardSlice = createSlice({
         },
         //------------------- editCard Reducer -----------------------------------------------------------------------
         [editCard.fulfilled]: (state, action) => {
+            console.log('action payload is', action.payload);
             const index = findIndex(action.payload._id, state.cards);
             const updatedCard = {
 
