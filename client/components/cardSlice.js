@@ -9,7 +9,8 @@ const initialState = {
     areCardsFetched: false,// renders loading on false, renders all cards on true
     isCorrect: false, //causes the next button to be available
     showHint: false, //flips to the hint specifically
-    showAnswer: false //flips the card
+    showAnswer: false, //flips the card
+    isWrong: false
 
 }
 
@@ -112,7 +113,24 @@ function findIndex(target, array) {
 export const cardSlice = createSlice({
     name: 'cards',
     initialState: initialState,
-    reducers: {},
+    reducers: {
+
+        setHint: (state, action) => {
+            console.log('setHint was invoked :)');
+            if(action.payload) {
+                state.showHint = true;
+            }
+        },
+
+        setRight: (state, action) => {
+            state.isCorrect = true;
+            state.isWrong = false;
+        },
+        setWrong: (state, action) => {
+            state.isWrong = true;
+            state.isCorrect = false;
+        }
+    },
     // Below reducers not necessary given our utilization of extra reducers!
 
     // addCard: (state, action) => {
@@ -235,5 +253,11 @@ export const cardSlice = createSlice({
         }
     }
 })
+
+export const {
+    setHint,
+    setRight,
+    setWrong
+} = cardSlice.actions;
 
 export default cardSlice.reducer;
