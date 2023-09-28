@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { editCard, deleteCard } from "./cardSlice";
 
 
 const Card = props => {

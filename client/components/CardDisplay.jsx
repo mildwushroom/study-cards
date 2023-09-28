@@ -9,7 +9,7 @@ import { useEffect } from "react";
 const CardDisplay = (props) => {
     const { card } = props;
 
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
 
     // const editFunc = useEffect(() => {
     //     dispatch(editCard(props.card._id, props.card))
