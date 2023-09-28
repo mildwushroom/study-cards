@@ -12,7 +12,8 @@ const initialState = {
     showAnswer: false, //flips the card
     isWrong: false,
     showNext: false,
-    currentQ: 1
+    currentQ: 1,
+    showInputElement: false
 }
 
 // thunks / aka async action creators
