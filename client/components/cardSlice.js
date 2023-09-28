@@ -10,8 +10,8 @@ const initialState = {
     isCorrect: false, //causes the next button to be available
     showHint: false, //flips to the hint specifically
     showAnswer: false, //flips the card
-    isWrong: false
-
+    isWrong: false,
+    showInputElement: false
 }
 
 // thunks / aka async action creators
@@ -64,7 +64,7 @@ export const createCard = createAsyncThunk('/api/createCard', async (card) => {
     }
 })
 // editCard
-export const editCard = createAsyncThunk('/api/editCard', async (id, card) => {
+export const editCard = createAsyncThunk('/api/editCard', async (card) => {
     let defaultHeader = {
         method: "PUT",
         headers: {
@@ -73,8 +73,10 @@ export const editCard = createAsyncThunk('/api/editCard', async (id, card) => {
         body: JSON.stringify(card)
     }
     try {
-        const response = await fetch(`/api/cards/${id}`, defaultHeader)
+        console.log('defaultHeader from editCard', defaultHeader);
+        const response = await fetch(`/api/cards/${card._id}`, defaultHeader)
             .then((data) => data.json());
+        console.log('response from Put request', response);
         return response;
     }
     catch (err) {
@@ -129,6 +131,15 @@ export const cardSlice = createSlice({
         setWrong: (state, action) => {
             state.isWrong = true;
             state.isCorrect = false;
+        },
+
+        setShowInputElement: (state, action) => {
+            if (action.payload) {
+                state.showInputElement = true;
+            }
+            else {
+                state.showInputElement = false;
+            }
         }
     },
     // Below reducers not necessary given our utilization of extra reducers!
@@ -225,9 +236,9 @@ export const cardSlice = createSlice({
             state.cards = [newCard, ...state.cards]
             // state.cards.push(newCard);
             state.cards.card_total++;
-            // if (!state.categories.includes(action.payload.category)) {
-            //     state.categories.push(action.payload.category)
-            // }
+            if (!state.categories.includes(action.payload.category)) {
+                state.categories.push(action.payload.category)
+            }
         },
         //------------------- editCard Reducer -----------------------------------------------------------------------
         [editCard.fulfilled]: (state, action) => {
@@ -257,7 +268,8 @@ export const cardSlice = createSlice({
 export const {
     setHint,
     setRight,
-    setWrong
+    setWrong,
+    setShowInputElement
 } = cardSlice.actions;
 
 export default cardSlice.reducer;
