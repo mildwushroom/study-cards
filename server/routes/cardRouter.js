@@ -26,7 +26,7 @@ cardRouter.put('/:id', cardController.editCard, (req, res) => {
 });
 
 cardRouter.delete('/:id', cardController.deleteCard, (req, res) => {
-    res.status(200).send('DELETE request to cards made successfully!');
+    res.status(200).send(res.locals.deleteCard);
 });
 
 module.exports = cardRouter;

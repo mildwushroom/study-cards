@@ -92,6 +92,7 @@ export const deleteCard = createAsyncThunk('/api/deleteCard', async (id) => {
     try {
         const response = await fetch(`/api/cards/${id}`, defaultHeader)
             .then((data) => data.json());
+        console.log('this is the response', response)
         return response;
     }
     catch (err) {
@@ -228,7 +229,6 @@ export const cardSlice = createSlice({
         },
         //------------------- deleteCard reducer -----------------------------------------------------------------------
         [deleteCard.fulfilled]: (state, action) => {
-            console.log('deleteCard reducer invoked')
             const index = findIndex(action.payload._id, state.cards);
             state.cards = state.cards.slice(0, index).concat(state.cards.slice(index + 1));
             state.card_total--;

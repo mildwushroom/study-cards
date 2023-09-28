@@ -24,6 +24,7 @@ const CardDisplay = (props) => {
 
     return (
         <Card 
+        _id = {card._id}
         question = {card.question}
         answer = {card.answer}
         hint = {card.hint}

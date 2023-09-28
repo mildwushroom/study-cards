@@ -171,7 +171,7 @@ cardController.deleteCard = async (req, res, next) => {
     try {
         const { id } = req.params;
         const deleteCard = await Card.findOneAndDelete({ _id: id });
-
+        res.locals.deleteCard = deleteCard;
         return next();
     }
     catch (err) {
