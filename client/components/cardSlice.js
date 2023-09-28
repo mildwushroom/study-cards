@@ -11,7 +11,8 @@ const initialState = {
     showHint: false, //flips to the hint specifically
     showAnswer: false, //flips the card
     isWrong: false,
-    showInputElement: false
+    showNext: false,
+    currentQ: 1
 }
 
 // thunks / aka async action creators
@@ -132,6 +133,25 @@ export const cardSlice = createSlice({
             state.isWrong = true;
             state.isCorrect = false;
         },
+        setNext: (state, action) => {
+            state.showNext = true;
+        },
+        
+        resetQuizBooleans: (state, action) => {
+            //reset these state variables whenever we visit mainpage
+            // or when we click next
+            state.showNext = false;
+            state.showHint = false;
+            state.isCorrect = false;
+            state.isWrong = false;
+        },
+
+        setNewDisplayCard: (state, action) => {
+            state.currentQ++;
+        },
+        decrementCurrentQ: (state, action) => {
+            state.currentQ--;
+        },
 
         setShowInputElement: (state, action) => {
             if (action.payload) {
@@ -201,6 +221,7 @@ export const cardSlice = createSlice({
         [getCategories.fulfilled]: (state, action) => {
             state.isCategoriesFetched = true;
             state.categories = action.payload;
+            state.currentQ = 1; //reset on Homepage -> always 1 at quiz start
         },
         [getCategories.pending]: (state, action) => {
             state.isCategoriesFetched = false;
@@ -269,6 +290,10 @@ export const {
     setHint,
     setRight,
     setWrong,
+    setNext,
+    resetQuizBooleans,
+    setNewDisplayCard,
+    decrementCurrentQ,
     setShowInputElement
 } = cardSlice.actions;
 
