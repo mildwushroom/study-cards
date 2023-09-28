@@ -7,7 +7,7 @@ import MainContainer from "../containers/MainContainer";
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const EditorPage = (props) => {
+const EditorPage = () => {
     const { category } = useParams();
 
     return (

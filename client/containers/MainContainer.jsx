@@ -15,7 +15,7 @@ const MainContainer = (props) => {
     }, []);
 
     const cards = useSelector(state => state.store.cards); //array of all cards that match the category
-    const areCardsFetched = useSelector((state) => state.store.areCardsFetched);
+    const areCardsFetched = useSelector(state => state.store.areCardsFetched);
 
     const cardsArray = cards.map((card, index) => {
         return (
@@ -27,7 +27,7 @@ const MainContainer = (props) => {
 
     return (
         <div>
-            <CardCreator/>
+            <CardCreator category={props.category}/>
             {
                 !areCardsFetched ? <p>Loading!</p> :
                     cardsArray

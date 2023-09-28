@@ -196,33 +196,30 @@ export const cardSlice = createSlice({
         //------------------- InitialState: cards (created and added to the cards array)---------------------------------
         [createCard.fulfilled]: (state, action) => {
             let newCard = {
-                id: action.payload._id,
-                data: {
-                    category: action.payload.category,
-                    question: action.payload.question,
-                    answer: action.payload.answer,
-                    hint: action.payload.hint
-                }
+                _id: action.payload._id,
+                category: action.payload.category,
+                question: action.payload.question,
+                answer: action.payload.answer,
+                hint: action.payload.hint
             };
-            state.cards.push(newCard);
+            console.log('newCard at createCard reducer', newCard);
+            state.cards = [newCard, ...state.cards]
+            // state.cards.push(newCard);
             state.cards.card_total++;
-            if (!state.categories.includes(action.payload.category)) {
-                state.categories.push(action.payload.category)
-            }
+            // if (!state.categories.includes(action.payload.category)) {
+            //     state.categories.push(action.payload.category)
+            // }
         },
         //------------------- editCard Reducer -----------------------------------------------------------------------
         [editCard.fulfilled]: (state, action) => {
             console.log('action payload is', action.payload);
             const index = findIndex(action.payload._id, state.cards);
             const updatedCard = {
-
-                id: action.payload._id,
-                data: {
-                    category: action.payload.category,
-                    question: action.payload.question,
-                    answer: action.payload.answer,
-                    hint: action.payload.hint
-                }
+                _id: action.payload._id,
+                category: action.payload.category,
+                question: action.payload.question,
+                answer: action.payload.answer,
+                hint: action.payload.hint
             };
             state.cards[index] = updatedCard;
             if (!state.categories.includes(action.payload.category)) {
