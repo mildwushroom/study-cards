@@ -19,26 +19,18 @@ const HomePage = (props) => {
     const isCategoriesFetched = useSelector((state) => state.store.isCategoriesFetched);
     //console.log(categories);
 
-    let currCategory;
-
     const categoriesArray = categories.map((category, index) => {
-        currCategory = category;
         return (
             <div key={index}>
                 <DisplayFolder category={category} />
                 <br />
-                <h1 style={{ textAlign: "center" }}></h1>
-                <Button variant="soft" color="success">
-                <Link to={`http://localhost:8080/editor/${category}`}>
-                    Go To Editor
-                </Link>
-                </Button>
             </div>
         )
     });
 
     return (
         <div>
+            <h1 style={{ textAlign: "center" }}></h1>
             {
                 !isCategoriesFetched ? <p>Loading!</p> :
                     categoriesArray
