@@ -4,6 +4,7 @@ import { getCategories } from '../components/cardSlice';
 import DisplayFolder from '../components/displayFolder';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { resetQuizBooleans } from '../components/cardSlice';
 
 
 
@@ -13,6 +14,7 @@ const HomePage = (props) => {
 
     useEffect(() => {
         dispatch(getCategories())
+        dispatch(resetQuizBooleans())
     }, []);
 
     const categories = useSelector((state) => state.store.categories);
