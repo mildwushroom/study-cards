@@ -9,8 +9,8 @@ const initialState = {
     areCardsFetched: false,// renders loading on false, renders all cards on true
     isCorrect: false, //causes the next button to be available
     showHint: false, //flips to the hint specifically
-    showAnswer: false //flips the card
-
+    showAnswer: false, //flips the card
+    showInputElement: false
 }
 
 // thunks / aka async action creators
