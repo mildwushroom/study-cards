@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import CardDisplay from "../components/CardDisplay";
 import CardCreator from "../components/CardCreator";
-import { getCategories, getCategoryCards, createCard, editCard, deleteCard } from "../components/cardSlice.js";
+import { getCategoryCards, createCard, editCard, deleteCard } from "../components/cardSlice.js";
 import { useEffect } from "react";
 
 const MainContainer = (props) => {
@@ -14,20 +14,26 @@ const MainContainer = (props) => {
         dispatch(getCategoryCards(props.category))
     }, []);
 
-    const cards = useSelector(state => state.store.cards);
-    console.log('cards is', cards);
+    const cards = useSelector(state => state.store.cards); //array of all cards that match the category
+    const areCardsFetched = useSelector((state) => state.store.areCardsFetched);
+
+    const cardsArray = cards.map((card, index) => {
+        return (
+            <div key={index}>
+                <CardDisplay card={card}/>
+            </div>
+        )
+    });
 
     return (
-        <div>Hello from MainContainer
-         
-
+        <div>
+            <CardCreator/>
+            {
+                !areCardsFetched ? <p>Loading!</p> :
+                    cardsArray
+            }
         </div>
-
-
     )
-
-
-
 }
 
 

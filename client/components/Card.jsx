@@ -5,12 +5,14 @@ const Card = props => {
   return (
     <div className="cardBox">
 
-      <p>Word: {props.word} </p>
-      <p>Definition: {props.definition}</p>
+      <p>Question: {props.question} </p>
+      <p>Answer: {props.answer}</p>
+      <p>Hint: {props.hint}</p>
+      <p>Category: {props.category}</p>
 
       <div>
-          <button onClick={props.editCardClick}>Edit Card</button>
-          <button onClick={props.deleteCardClick}>Delete Card</button>
+          <button onClick={props.edit}>Edit Card</button>
+          {/* <button onClick={props.delete}>Delete Card</button> */}
       </div>
     </div>
   )
