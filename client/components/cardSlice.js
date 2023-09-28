@@ -44,7 +44,7 @@ export const getCategoryCards = createAsyncThunk('/api/categoryCards', async (ca
 });
 
 // createCard
-export const createCard = createAsyncThunk('/api/cards', async (card) => {
+export const createCard = createAsyncThunk('/api/createCard', async (card) => {
     let defaultHeader = {
         method: "POST",
         headers: {
@@ -55,6 +55,7 @@ export const createCard = createAsyncThunk('/api/cards', async (card) => {
     try {
         const response = await fetch('/api/cards', defaultHeader)
             .then((data) => data.json());
+        console.log('createCard response', response);
         return response;
     }
     catch (err) {
@@ -62,7 +63,7 @@ export const createCard = createAsyncThunk('/api/cards', async (card) => {
     }
 })
 // editCard
-export const editCard = createAsyncThunk('/api/cards', async (id, card) => {
+export const editCard = createAsyncThunk('/api/editCard', async (id, card) => {
     let defaultHeader = {
         method: "PUT",
         headers: {
@@ -81,7 +82,7 @@ export const editCard = createAsyncThunk('/api/cards', async (id, card) => {
 })
 
 // deleteCard
-export const deleteCard = createAsyncThunk('/api/cards', async (id) => {
+export const deleteCard = createAsyncThunk('/api/deleteCard', async (id) => {
     let defaultHeader = {
         method: "DELETE",
         headers: {
@@ -211,6 +212,7 @@ export const cardSlice = createSlice({
         },
         //------------------- editCard Reducer -----------------------------------------------------------------------
         [editCard.fulfilled]: (state, action) => {
+            console.log('action payload is', action.payload);
             const index = findIndex(action.payload._id, state.cards);
             const updatedCard = {
 

@@ -15,6 +15,11 @@ const DisplayFolder = (props) => {
                         Go To Quiz
                     </Link>
                 </Button>
+                <Button variant="soft" color="success">
+                <Link to={`/editor/${props.category}`}>
+                    Go To Editor
+                </Link>
+                </Button>
             </CardActions>
         </Card>
     )
